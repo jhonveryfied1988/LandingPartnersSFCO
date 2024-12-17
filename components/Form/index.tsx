@@ -3,6 +3,17 @@ import { useState, useEffect } from "react";
 import { FloatingLabelInput, InputOptions } from "../FloatingLabelInput";
 import customAxios from "@/lib/axios";
 
+interface GeoapifyFeature {
+  properties: {
+    formatted: string;
+  };
+}
+
+interface GeoapifyResponse {
+  features: GeoapifyFeature[];
+}
+
+
 const inputs: InputOptions[] = [
   {
     id: "name",
@@ -54,7 +65,7 @@ export default function ContactForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isSuggestionSelected, setIsSuggestionSelected] = useState(false);
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value, type, checked } = e.target;
     if(id === "address"){
       setIsSuggestionSelected(false)
@@ -132,7 +143,7 @@ export default function ContactForm() {
         .then((response) => response.json())
         .then((data) =>
           setSuggestions(
-            data.features.map((feature: any) => feature.properties.formatted)
+            data.features.map((feature: GeoapifyFeature) => feature.properties.formatted)
           )
         )
         .catch((error) => console.error("Error fetching data:", error));
