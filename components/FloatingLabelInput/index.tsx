@@ -3,7 +3,7 @@ export interface InputOptions {
   text: string;
   value?:string;
   type: "text" | "password" | "email" | "url" | "tel" | "number" | "search";
-  function?: (value?:any ) => void;
+  function?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
   pattern?: RegExp;
   errorMessage?: string;
