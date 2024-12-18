@@ -38,10 +38,6 @@ const Footer = () => {
               </a>
             </div>
 
-            {/* Columna 2: Sección "Pages" */}
-
-            {/* Columna 3: Sección "Support" */}
-
             {/* Columna 4: Formulario de Contacto */}
             <div>
               <h4 className="mb-9 text-itemtitle2 text-black dark:text-white xl:text-center font-bold ">
