@@ -9,11 +9,6 @@ interface GeoapifyFeature {
   };
 }
 
-interface GeoapifyResponse {
-  features: GeoapifyFeature[];
-}
-
-
 const inputs: InputOptions[] = [
   {
     id: "name",
@@ -149,7 +144,7 @@ export default function ContactForm() {
         .catch((error) => console.error("Error fetching data:", error));
     }, 500);
     return () => clearTimeout(getData);
-  }, [formData.address]);
+  }, [formData.address,isSuggestionSelected]);
 
   return (
     <div className="pt-10 max-w-xl p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-lg sm:p-10 lg:p-16 mt-5">
