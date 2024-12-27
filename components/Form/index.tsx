@@ -62,8 +62,8 @@ export default function ContactForm() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value, type, checked } = e.target;
-    if(id === "address"){
-      setIsSuggestionSelected(false)
+    if (id === "address") {
+      setIsSuggestionSelected(false);
     }
     setFormData((prevData) => ({
       ...prevData,
@@ -92,7 +92,7 @@ export default function ContactForm() {
       return setErrorMessage("Please enter a valid 10-digit phone number.");
     }
 
-    if(!formData.address){
+    if (!formData.address) {
       return setErrorMessage("Please enter an address");
     }
 
@@ -104,9 +104,9 @@ export default function ContactForm() {
     try {
       const response = await customAxios.post("leads", {
         ...formData,
-        source: "Landing SFCO",
-        status: "Landing SFCO",
-        assigned: "Landing SFCO",
+        source: 2,
+        status: 13,
+        assigned: 2,
       });
 
       if (response.data.status === 200) {
@@ -138,13 +138,15 @@ export default function ContactForm() {
         .then((response) => response.json())
         .then((data) =>
           setSuggestions(
-            data.features.map((feature: GeoapifyFeature) => feature.properties.formatted)
+            data.features.map(
+              (feature: GeoapifyFeature) => feature.properties.formatted
+            )
           )
         )
         .catch((error) => console.error("Error fetching data:", error));
     }, 500);
     return () => clearTimeout(getData);
-  }, [formData.address,isSuggestionSelected]);
+  }, [formData.address, isSuggestionSelected]);
 
   return (
     <div className="pt-10 max-w-xl p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-lg sm:p-10 lg:p-16 mt-5">
@@ -152,7 +154,9 @@ export default function ContactForm() {
         Get Fair Cash Offer today!
       </h2>
       <h4 className="flex text-lg mb-5 text-black dark:text-white font-sans">
-      Avoid commissions, making repairs, and the months of uncertainty. You’ll get a fair “as-is” cash offer on your house. More Cash In Your Pocket. Begin the process by completing our brief form.
+        Avoid commissions, making repairs, and the months of uncertainty. You’ll
+        get a fair “as-is” cash offer on your house. More Cash In Your Pocket.
+        Begin the process by completing our brief form.
       </h4>
       <form onSubmit={handleSendForm} noValidate>
         {inputs.map((input, index) => (
